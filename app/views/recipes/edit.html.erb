@@ -1,0 +1,14 @@
+<div class="page-header">
+  <h2><%= I18n.t("headers.edit", model_name: Recipe.model_name.human) %></h2>
+</div>
+
+<ul class="nav nav-tabs">
+	<%= tab("List", recipes_path, "fa fa-list") %>
+  <%= tab "Add New", new_recipe_path, "fa fa-plus" %>
+  <%= tab "Details", @recipe, "fa fa-info-circle" %>
+  <%= active_tab "Edit", edit_recipe_path(@recipe), "fa fa-pencil-square-o" %>
+</ul>
+
+<%= form_for(@recipe, html: { class: "edit_recipe form-horizontal", role: "form" }) do |f| %>
+  <%= render 'form', f: f %>
+<% end %>

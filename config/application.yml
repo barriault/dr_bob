@@ -1,0 +1,8 @@
+# Add application configuration variables here, as shown below.
+# use 'figaro heroku:set -e production' to push to heroku
+#
+WEBSITE_NAME: "Dr. Bob"
+
+development:
+    PG_USERNAME: "dr_bob_pg_user"
+    PG_PASSWORD: "bob8jmn3"

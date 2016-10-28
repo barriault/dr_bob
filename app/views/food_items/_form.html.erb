@@ -1,0 +1,88 @@
+<!-- Errors -->
+<%= bootstrap_errors f %>
+
+<!-- Name -->
+<%= content_tag(:div, class: "form-group #{has_error(f.object, :name)}") do %>
+  <%= f.label :name, class: "col-sm-2 control-label" %>
+  <div class="col-sm-10">
+    <%= f.text_field :name, placeholder: FoodItem.human_attribute_name(:name), class: "form-control" %>
+  </div>
+<% end %>
+
+<!-- Brand -->
+<%= content_tag(:div, class: "form-group #{has_error(f.object, :brand)}") do %>
+  <%= f.label :brand, class: "col-sm-2 control-label" %>
+  <div class="col-sm-10">
+    <%= f.text_field :brand, placeholder: FoodItem.human_attribute_name(:brand), class: "form-control" %>
+  </div>
+<% end %>
+
+<!-- Calories -->
+<%= content_tag(:div, class: "form-group #{has_error(f.object, :calories)}") do %>
+  <%= f.label :calories, class: "col-sm-2 control-label" %>
+  <div class="col-sm-10">
+    <%= f.text_field :calories, placeholder: FoodItem.human_attribute_name(:calories), class: "form-control" %>
+  </div>
+<% end %>
+
+<!-- Fat -->
+<%= content_tag(:div, class: "form-group #{has_error(f.object, :fat)}") do %>
+  <%= f.label :fat, class: "col-sm-2 control-label" %>
+  <div class="col-sm-10">
+    <div class="input-group">
+      <%= f.text_field :fat, placeholder: FoodItem.human_attribute_name(:fat), class: "form-control" %>
+      <span class="input-group-addon" >Grams</span>
+    </div>
+  </div>
+<% end %>
+
+<!-- Carbs -->
+<%= content_tag(:div, class: "form-group #{has_error(f.object, :carbs)}") do %>
+  <%= f.label :carbs, class: "col-sm-2 control-label" %>
+  <div class="col-sm-10">
+    <div class="input-group">
+      <%= f.text_field :carbs, placeholder: FoodItem.human_attribute_name(:carbs), class: "form-control" %>
+      <span class="input-group-addon" >Grams</span>
+    </div>
+  </div>
+<% end %>
+
+<!-- Fiber -->
+<%= content_tag(:div, class: "form-group #{has_error(f.object, :fiber)}") do %>
+  <%= f.label :fiber, class: "col-sm-2 control-label" %>
+  <div class="col-sm-10">
+    <div class="input-group">
+      <%= f.text_field :fiber, placeholder: FoodItem.human_attribute_name(:fiber), class: "form-control" %>
+      <span class="input-group-addon" >Grams</span>
+    </div>
+  </div>
+<% end %>
+
+<!-- Protein -->
+<%= content_tag(:div, class: "form-group #{has_error(f.object, :protein)}") do %>
+  <%= f.label :protein, class: "col-sm-2 control-label" %>
+  <div class="col-sm-10">
+    <div class="input-group">
+      <%= f.text_field :protein, placeholder: FoodItem.human_attribute_name(:protein), class: "form-control" %>
+      <span class="input-group-addon" >Grams</span>
+    </div>
+  </div>
+<% end %>
+
+<!-- SI Dimension/Units -->
+<%= content_tag(:div, class: "form-group #{has_error(f.object, :si_dimension) || has_error(f.object, :si_units)}") do %>
+  <%= f.label :si_dimension, class: "col-sm-2 control-label" %>
+  <div class="col-sm-2">
+    <%= f.text_field :si_dimension, placeholder: FoodItem.human_attribute_name(:si_dimension), class: "form-control" %>
+  </div>
+  <div class="col-sm-8">
+    <%= f.select :si_units, Units::SI_UNITS, { include_blank: false }, { class: "form-control" } %>
+  </div>
+<% end %>
+
+
+<div class="form-group">
+  <div class="col-sm-offset-2 col-sm-10">
+    <%= f.submit class: "btn btn-default" %>
+  </div>
+</div>

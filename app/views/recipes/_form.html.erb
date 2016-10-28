@@ -1,0 +1,50 @@
+<!-- Errors -->
+<%= bootstrap_errors f %>
+
+<!-- Title -->
+<%= content_tag(:div, class: "form-group #{has_error(f.object, :title)}") do %>
+  <%= f.label :title, class: "col-sm-2 control-label" %>
+  <div class="col-sm-10">
+    <%= f.text_field :title, placeholder: Recipe.human_attribute_name(:title), class: "form-control" %>
+  </div>
+<% end %>
+
+<!-- Description -->
+<%= content_tag(:div, class: "form-group #{has_error(f.object, :description)}") do %>
+  <%= f.label :description, class: "col-sm-2 control-label" %>
+  <div class="col-sm-10">
+    <%= f.text_area :description, placeholder: Recipe.human_attribute_name(:description), class: "form-control", rows: "10" %>
+  </div>
+<% end %>
+
+<% if f.object.new_record? -%>
+  <%= content_tag(:div, class: "form-group") do %>
+    <%= f.label :ingredients, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <p class="form-control-static">Ingredients can be added after the Recipe is created.</p>
+    </div>
+  <% end %>
+<% end -%>
+
+<!-- Instructions -->
+<%= content_tag(:div, class: "form-group #{has_error(f.object, :instructions)}") do %>
+  <%= f.label :instructions, class: "col-sm-2 control-label" %>
+  <div class="col-sm-10">
+    <%= f.text_area :instructions, placeholder: Recipe.human_attribute_name(:instructions), class: "form-control", rows: "10" %>
+  </div>
+<% end %>
+
+<!-- Servings -->
+<%= content_tag(:div, class: "form-group #{has_error(f.object, :servings)}") do %>
+  <%= f.label :servings, class: "col-sm-2 control-label" %>
+  <div class="col-sm-10">
+    <%= f.text_field :servings, placeholder: Recipe.human_attribute_name(:servings), class: "form-control", rows: "10" %>
+  </div>
+<% end %>
+
+
+<div class="form-group">
+  <div class="col-sm-offset-2 col-sm-10">
+    <%= f.submit class: "btn btn-default" %>
+  </div>
+</div>

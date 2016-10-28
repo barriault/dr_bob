@@ -1,0 +1,153 @@
+<div class="page-header">
+  <h2><%= Recipe.model_name.human %></h2>
+</div>
+
+<ul class="nav nav-tabs">
+	<%= tab("List", recipes_path, "fa fa-list") %>
+  <%= tab "Add New", new_recipe_path, "fa fa-plus" %>
+  <%= active_tab "Details", @recipe, "fa fa-info-circle" %>
+  <%= tab "Edit", edit_recipe_path(@recipe), "fa fa-pencil-square-o" %>
+</ul>
+
+<div class="row">
+  <div class="col-lg-9">
+    <!-- Description -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h2 class="panel-title">
+				      <%= @recipe.title %>
+				    </h2>
+			    </div>
+			
+			    <div class="panel-body">
+            <%= simple_format @recipe.description %>
+          </div>
+          </div>
+      </div>
+    </div>
+    
+    <!-- Ingredients -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h2 class="panel-title">
+				      Ingredients
+				    </h2>
+			    </div>
+			
+          <div class="table-responsive">
+    		    <table class="table table-condensed">
+    		        <thead>
+                <tr>
+                  <th nowrap class="shrink"><%= Ingredient.human_attribute_name(:quantity) %></th>
+                  <th nowrap class="shrink"><%= Ingredient.human_attribute_name(:measurement_name) %></th>
+                  <th nowrap class="shrink"><%= Ingredient.human_attribute_name(:prep) %></th>
+                  <th><%= Ingredient.human_attribute_name(:food_item_name) %></th>
+
+                  <th class="shrink"></th>
+                  <th class="shrink"></th>
+                </tr>
+              </thead>
+          
+    			    <tbody>
+                <% @recipe.ingredients.order(id: :asc).each do |ingredient| %>
+                  <tr>
+                    <td class="text-right"><%= ingredient.quantity %></td>
+                    <td nowrap><%= ingredient.measurement_name %></td>
+                    <td nowrap><%= ingredient.prep %></td>
+                    <td><%= ingredient.food_item_name %></td>
+
+                    <td>
+                      <%= link_to edit_ingredient_path(ingredient), title: "Edit", data: { toggle: "tooltip" } do %>
+                        <span class="fa fa-pencil-square-o"></span>
+                      <% end %>
+                    </td>
+                    <td>
+                      <%= link_to ingredient, method: :delete, title: "Delete", data: { toggle: "tooltip", confirm: 'Are you sure?' } do %>
+                        <span class="fa fa-trash-o"></span>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+    			    </tbody>
+    		    </table>
+    		    
+    		    <div class="panel-footer">
+  				    <%= link_to new_recipe_ingredient_path(@recipe) do %>
+  					    <span class="fa fa-plus"></span> Add New
+  				    <% end %>
+  			    </div>
+          </div>			
+        </div>
+      </div>
+    </div>
+    
+    <!-- Instructions -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h2 class="panel-title">
+				      Instructions
+				    </h2>
+			    </div>
+			
+			    <div class="panel-body">
+            <%= simple_format @recipe.instructions %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Nutritional Info -->
+  <div class="col-lg-3">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h2 class="panel-title">
+				  Nutritional Info <span class="pull-right"><%= pluralize(@recipe.servings, "Serving") %></span>
+				</h2>
+			</div>
+			
+      <div class="table-responsive">
+    		<table class="table table-condensed">
+    			<tbody>
+            <tr>
+              <th><%= Recipe.human_attribute_name(:calories) %></th>
+              <td class="text-right"><%= @recipe.calories %></td>
+              <td class="shrink"> </td>
+            </tr>
+            
+            <tr>
+              <th><%= Recipe.human_attribute_name(:fat) %></th>
+              <td class="text-right"><%= @recipe.fat %></td>
+              <td class="shrink"><%= "Gram".pluralize(@recipe.fat) %></td>
+            </tr>
+            
+            <tr>
+              <th><%= Recipe.human_attribute_name(:carbs) %></th>
+              <td class="text-right"><%= @recipe.carbs %></td>
+              <td class="shrink"><%= "Gram".pluralize(@recipe.carbs) %></td>
+            </tr>
+            
+            <tr>
+              <th><%= Recipe.human_attribute_name(:fiber) %></th>
+              <td class="text-right"><%= @recipe.fiber %></td>
+              <td class="shrink"><%= "Gram".pluralize(@recipe.fiber) %></td>
+            </tr>
+            
+            <tr>
+              <th><%= Recipe.human_attribute_name(:protein) %></th>
+              <td class="text-right"><%= @recipe.protein %></td>
+              <td class="shrink"><%= "Gram".pluralize(@recipe.protein) %></td>
+            </tr>
+    			</tbody>
+    		</table>
+      </div>
+			
+    </div>
+  </div>
+</div>

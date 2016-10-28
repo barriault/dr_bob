@@ -1,0 +1,132 @@
+<div class="page-header">
+  <h2><%= FoodItem.model_name.human %></h2>
+</div>
+
+<ul class="nav nav-tabs">
+	<%= tab("List", food_items_path, "fa fa-list") %>
+  <%= tab "Add New", new_food_item_path, "fa fa-plus" %>
+  <%= active_tab "Details", @food_item, "fa fa-info-circle" %>
+  <%= tab "Edit", edit_food_item_path(@food_item), "fa fa-pencil-square-o" %>
+</ul>
+
+<!-- Food Item -->
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h2 class="panel-title">
+				  <%= @food_item.name %> <small><%= @food_item.brand %></small>
+				</h2>
+			</div>
+			
+      <div class="table-responsive">
+    		<table class="table table-condensed">
+    			<tbody>
+            <tr>
+              <th><%= FoodItem.human_attribute_name(:calories) %></th>
+              <td class="text-right"><%= @food_item.calories %></td>
+              <td class="shrink"> </td>
+            </tr>
+            
+            <tr>
+              <th><%= FoodItem.human_attribute_name(:fat) %></th>
+              <td class="text-right"><%= @food_item.fat %></td>
+              <td class="shrink"><%= "Gram".pluralize(@food_item.fat) %></td>
+            </tr>
+            
+            <tr>
+              <th><%= FoodItem.human_attribute_name(:carbs) %></th>
+              <td class="text-right"><%= @food_item.carbs %></td>
+              <td class="shrink"><%= "Gram".pluralize(@food_item.carbs) %></td>
+            </tr>
+            
+            <tr>
+              <th><%= FoodItem.human_attribute_name(:fiber) %></th>
+              <td class="text-right"><%= @food_item.fiber %></td>
+              <td class="shrink"><%= "Gram".pluralize(@food_item.fiber) %></td>
+            </tr>
+            
+            <tr>
+              <th><%= FoodItem.human_attribute_name(:protein) %></th>
+              <td class="text-right"><%= @food_item.protein %></td>
+              <td class="shrink"><%= "Gram".pluralize(@food_item.protein) %></td>
+            </tr>
+            
+            <tr>
+              <th><%= FoodItem.human_attribute_name(:si_dimension) %></th>
+              <td class="text-right"><%= @food_item.si_dimension %></td>
+              <td class="shrink"><%= @food_item.si_units.pluralize(@food_item.si_dimension) %></td>
+            </tr>
+    			</tbody>
+    		</table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Measurements -->
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h2 class="panel-title">
+				  <%= Measurement.model_name.human.pluralize %>
+				</h2>
+			</div>
+			
+      <div class="table-responsive">
+    		<table class="table table-condensed">
+    		    <thead>
+            <tr>
+              <th class="shrink"> </th>
+              <th><%= Measurement.human_attribute_name(:singular_name) %></th>
+              <th nowrap class="shrink"><%= Measurement.human_attribute_name(:calories) %></th>
+              <th nowrap class="shrink"><%= Measurement.human_attribute_name(:fat) %></th>
+              <th nowrap class="shrink"><%= Measurement.human_attribute_name(:carbs) %></th>
+              <th nowrap class="shrink"><%= Measurement.human_attribute_name(:fiber) %></th>
+              <th nowrap class="shrink"><%= Measurement.human_attribute_name(:protein) %></th>
+              <th nowrap class="shrink"><%= Measurement.human_attribute_name(:si_dimension) %></th>
+              <th nowrap class="shrink"><%= Measurement.human_attribute_name(:si_units) %></th>
+      
+              <th class="shrink"></th>
+              <th class="shrink"></th>
+            </tr>
+          </thead>
+          
+    			<tbody>
+            <% @food_item.measurements.order(singular_name: :asc, prep: :asc).each do |measurement| %>
+              <tr>
+                <td>1</td>
+                <td><%= measurement.name %></td>
+                <td class="text-right"><%= measurement.calories %></td>
+                <td class="text-right"><%= measurement.fat %></td>
+                <td class="text-right"><%= measurement.carbs %></td>
+                <td class="text-right"><%= measurement.fiber %></td>
+                <td class="text-right"><%= measurement.protein %></td>
+                <td class="text-right"><%= measurement.si_dimension %></td>
+                <td><%= measurement.si_units.pluralize(measurement.si_dimension) %></td>
+                
+                <td>
+                  <%= link_to edit_measurement_path(measurement), title: "Edit", data: { toggle: "tooltip" } do %>
+                    <span class="fa fa-pencil-square-o"></span>
+                  <% end %>
+                </td>
+                <td>
+                  <%= link_to measurement, method: :delete, title: "Delete", data: { toggle: "tooltip", confirm: 'Are you sure?' } do %>
+                    <span class="fa fa-trash-o"></span>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+    			</tbody>
+    		</table>
+    		
+    		<div class="panel-footer">
+  				<%= link_to new_food_item_measurement_path(@food_item) do %>
+  					<span class="fa fa-plus"></span> Add New
+  				<% end %>
+  			</div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+default: &default
+  adapter: postgresql
+  encoding: SQL_ASCII
+  pool: 5
+  username: <%= ENV['PG_USERNAME'] %>
+  password: <%= ENV['PG_PASSWORD'] %>
+  host:     <%= ENV['IP'] %>
+
+development:
+  <<: *default
+  database: dr_bob_dev
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: dr_bob_test
+
+production:
+  <<: *default
+  database: dr_bob_production

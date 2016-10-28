@@ -1,0 +1,58 @@
+<div class="page-header">
+  <h2><%= Recipe.model_name.human.pluralize %></h2>
+</div>
+
+<ul class="nav nav-tabs">
+	<%= active_tab("List", recipes_path, "fa fa-list") %>
+  <%= tab "Add New", new_recipe_path, "fa fa-plus" %>
+  <%= disabled_tab "Details", "fa fa-info-circle" %>
+  <%= disabled_tab "Edit", "fa fa-pencil-square-o" %>
+</ul>
+
+<table class="table table-hover table-condensed">
+  <thead>
+    <tr>
+      <th><%= Recipe.human_attribute_name(:title) %></th>
+      <th nowrap class="shrink"><%= Recipe.human_attribute_name(:calories) %></th>
+      <th nowrap class="shrink"><%= Recipe.human_attribute_name(:fat) %></th>
+      <th nowrap class="shrink"><%= Recipe.human_attribute_name(:carbs) %></th>
+      <th nowrap class="shrink"><%= Recipe.human_attribute_name(:fiber) %></th>
+      <th nowrap class="shrink"><%= Recipe.human_attribute_name(:protein) %></th>
+      <th nowrap class="shrink"><%= Recipe.human_attribute_name(:servings) %></th>
+
+      <th class="shrink"></th>
+      <th class="shrink"></th>
+      <th class="shrink"></th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <% @recipes.each do |recipe| %>
+      <tr>
+        <td><%= recipe.title %></td>
+        <td class="text-right"><%= recipe.calories %></td>
+        <td class="text-right"><%= recipe.fat %></td>
+        <td class="text-right"><%= recipe.carbs %></td>
+        <td class="text-right"><%= recipe.fiber %></td>
+        <td class="text-right"><%= recipe.protein %></td>
+        <td class="text-right"><%= recipe.servings %></td>
+
+        <td>
+          <%= link_to recipe, title: "Details", data: { toggle: "tooltip" } do %>
+            <span class="fa fa-info-circle"></span>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to edit_recipe_path(recipe), title: "Edit", data: { toggle: "tooltip" } do %>
+            <span class="fa fa-pencil-square-o"></span>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to recipe, method: :delete, title: "Delete", data: { toggle: "tooltip", confirm: 'Are you sure?' } do %>
+            <span class="fa fa-trash-o"></span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

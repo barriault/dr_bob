@@ -1,0 +1,7 @@
+<div class="page-header">
+  <h2><%= I18n.t("headers.edit", model_name: Ingredient.model_name.human) %> <small>for <%= link_to @recipe.title, @recipe %></small></h2>
+</div>
+
+<%= form_for(@ingredient, html: { class: "edit_ingredient form-horizontal", role: "form" }) do |f| %>
+  <%= render 'form', f: f %>
+<% end %>

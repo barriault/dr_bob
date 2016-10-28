@@ -1,0 +1,14 @@
+<div class="page-header">
+  <h2><%= I18n.t("headers.edit", model_name: FoodItem.model_name.human) %></h2>
+</div>
+
+<ul class="nav nav-tabs">
+	<%= tab("List", food_items_path, "fa fa-list") %>
+  <%= tab "Add New", new_food_item_path, "fa fa-plus" %>
+  <%= tab "Details", @food_item, "fa fa-info-circle" %>
+  <%= active_tab "Edit", edit_food_item_path(@food_item), "fa fa-pencil-square-o" %>
+</ul>
+
+<%= form_for(@food_item, html: { class: "edit_food_item form-horizontal", role: "form" }) do |f| %>
+  <%= render 'form', f: f %>
+<% end %>

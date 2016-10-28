@@ -1,0 +1,7 @@
+<div class="page-header">
+  <h2><%= I18n.t("headers.new", model_name: Measurement.model_name.human) %> <small>for <%= link_to @food_item.name, @food_item %></small></h2>
+</div>
+
+<%= form_for([@food_item, @measurement], html: { class: "new_measurement form-horizontal", role: "form" }) do |f| %>
+  <%= render 'form', f: f %>
+<% end %>

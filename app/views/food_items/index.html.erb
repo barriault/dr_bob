@@ -1,0 +1,62 @@
+<div class="page-header">
+  <h2><%= FoodItem.model_name.human.pluralize %></h2>
+</div>
+
+<ul class="nav nav-tabs">
+	<%= active_tab("List", food_items_path, "fa fa-list") %>
+  <%= tab "Add New", new_food_item_path, "fa fa-plus" %>
+  <%= disabled_tab "Details", "fa fa-info-circle" %>
+  <%= disabled_tab "Edit", "fa fa-pencil-square-o" %>
+</ul>
+
+<table class="table table-hover table-condensed">
+  <thead>
+    <tr>
+      <th nowrap class="shrink"><%= FoodItem.human_attribute_name(:name) %></th>
+      <th><%= FoodItem.human_attribute_name(:brand) %></th>
+      <th nowrap class="shrink"><%= FoodItem.human_attribute_name(:calories) %></th>
+      <th nowrap class="shrink"><%= FoodItem.human_attribute_name(:fat) %></th>
+      <th nowrap class="shrink"><%= FoodItem.human_attribute_name(:carbs) %></th>
+      <th nowrap class="shrink"><%= FoodItem.human_attribute_name(:fiber) %></th>
+      <th nowrap class="shrink"><%= FoodItem.human_attribute_name(:protein) %></th>
+      <th nowrap class="shrink"><%= FoodItem.human_attribute_name(:si_dimension) %></th>
+      <th nowrap class="shrink"><%= FoodItem.human_attribute_name(:si_units) %></th>
+      
+      <th class="shrink"></th>
+      <th class="shrink"></th>
+      <th class="shrink"></th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <% @food_items.each do |food_item| %>
+      <tr>
+        <td nowrap><%= food_item.name %></td>
+        <td><%= food_item.brand %></td>
+        <td class="text-right"><%= food_item.calories %></td>
+        <td class="text-right"><%= food_item.fat %></td>
+        <td class="text-right"><%= food_item.carbs %></td>
+        <td class="text-right"><%= food_item.fiber %></td>
+        <td class="text-right"><%= food_item.protein %></td>
+        <td class="text-right"><%= food_item.si_dimension %></td>
+        <td><%= food_item.si_units.pluralize(food_item.si_dimension) %></td>
+        
+        <td>
+          <%= link_to food_item, title: "Details", data: { toggle: "tooltip" } do %>
+            <span class="fa fa-info-circle"></span>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to edit_food_item_path(food_item), title: "Edit", data: { toggle: "tooltip" } do %>
+            <span class="fa fa-pencil-square-o"></span>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to food_item, method: :delete, title: "Delete", data: { toggle: "tooltip", confirm: 'Are you sure?' } do %>
+            <span class="fa fa-trash-o"></span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
