@@ -7,6 +7,7 @@ class Ingredient < ApplicationRecord
   before_validation :update_cached_values
   
   after_save :update_recipe
+  after_destroy :update_recipe
   
   validates :food_item_id, uniqueness: { scope: :recipe_id }
   validates :quantity, numericality: :greater_than_or_equal_to_zero

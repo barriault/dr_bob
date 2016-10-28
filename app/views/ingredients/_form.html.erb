@@ -16,7 +16,7 @@
     <%= f.text_field :quantity, placeholder: Ingredient.human_attribute_name(:quantity), class: "form-control" %>
   </div>
   <div class="col-sm-8">
-    <%= f.collection_select :measurement_id, f.object.try(:food_item).try(:measurements) || [ ], :id, :singular_name, { include_blank: true }, { class: "form-control" } %>
+    <%= f.collection_select :measurement_id, f.object.try(:food_item).try(:measurements) || [ ], :id, :name, { include_blank: true }, { class: "form-control" } %>
   </div>
 <% end %>
 
